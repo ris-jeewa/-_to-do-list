@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="list.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Master</title>
+  </head>
+  <body>
+    <!-- <div class="container"> -->
+      <header>
+        <div class="container-bg"></div>
+        <form id="task-form" >
+          <h1>Daily Master</h1>
+          <div class="input">
+            <input type="text" id="add-task" placeholder="Enter your task" />
+            <button type="submit" id="add-btn" >ADD</button>
+          </div>
+          <div class="message"></div>
+        </form>
+      </header>
+  
+      <main>
+        <section class="task-list">
+          <h2>Task List</h2>
+          <div id="tasks"></div>
+      </main>
+
+    <script>
+      var form = document.getElementById('task-form');
+      var err = document.getElementsByClassName('message');
+      form.addEventListener('submit',function(event){
+        event.preventDefault();
+        var input = document.getElementById('add-task').value;
+        if (input === ''){
+          err[0].innerHTML = '* Please enter a task';
+          return;
+        }else{
+          err[0].innerHTML = '';
+        }
+        var tasks = document.getElementById('tasks');
+        tasks.innerHTML += `<div class="task">
+              <div class="task-content">
+                <input 
+                  type="text"
+                  class="task-name"
+                  value="${input}"
+                  readonly
+                 />
+              </div>
+              <div class="actions">
+                <button type="submit" class="edit" onClick="toggleEditMode(this)">Edit</button>
+                <button type="submit" class="delete" onClick="deleteTask(this)">Delete</button>
+              </div>
+            </div>`;
+        
+        document.getElementById('add-task').value = '';
+      })
+
+      function toggleEditMode(){
+        var task = document.getElementsByClassName('task-name');
+        var edit = document.getElementsByClassName('edit');
+        if(task[0].hasAttribute('readonly')){
+          for(var i=0; i<task.length; i++){
+            task[i].removeAttribute('readonly');
+          }
+          edit[0].innerHTML = 'Save';
+        }else{
+          for(var i=0; i<task.length; i++){
+            task[i].setAttribute('readonly',true);
+          }
+          edit[0].innerHTML = 'Edit';
+        }
+      }
+
+      function deleteTask(e){
+        e.parentElement.parentElement.remove();
+      }
+      
+    </script>
+    
+  </body>
+</html>
