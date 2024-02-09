@@ -74,8 +74,7 @@ main {
 
 
 #add-btn {
-  /* background-color: #5b5454; */
-  background: -webkit-gradient(
+    background: -webkit-gradient(
     linear,
     left top,
     left bottom,
