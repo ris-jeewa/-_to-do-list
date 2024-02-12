@@ -7,6 +7,19 @@
     <title>Daily Master</title>
   </head>
   <body>
+    <div class="sideBar" id="sidebar">
+      <img src="./icons/xmark-solid.svg" alt="x" width="20" height="20" class="closebtn" onclick="closeNav()"/>
+      <div class="menuItems">
+        <a href="#" onclick="handleDisplay(this)">Important</a>
+        <a href="#">Academic</a>
+        <a href="#">Projects</a>
+        <a href="#">Daily</a>
+        <a href="#">Trash</a>
+      </div>
+    </div>
+    
+    <div id="container">
+        <img src="./icons/bars-solid.svg" alt="bars" height="20" width="20" class="openBtn" onclick="openNav()">
 
       <header>
         <div class="container-bg"></div>
@@ -14,69 +27,29 @@
           <h1>Daily Master</h1>
           <div class="input">
             <input type="text" id="add-task" placeholder="Enter your task" />
-            <button type="submit" id="add-btn" >ADD</button>
+            
+              <select name="category" id="category">
+                <option value="daily">Daily</option>
+                <option value="aca">Academic</option>
+                <option value="dev">Development</option>
+              </select>
+              
           </div>
           <div class="message"></div>
+
+          <button type="submit" id="add-btn" >ADD</button>
         </form>
       </header>
   
       <main>
         <section class="task-list">
-          <h2>Task List</h2>
-          <div id="tasks"></div>
+          <h2 id="display-name">Task List</h2>
+          <div id="tasks">
+          </div>
       </main>
+    </div>
 
-    <script>
-      var form = document.getElementById('task-form');
-      var err = document.getElementsByClassName('message');
-      form.addEventListener('submit',function(event){
-        event.preventDefault();
-        var input = document.getElementById('add-task').value;
-        if (input === ''){
-          err[0].innerHTML = '* Please enter a task';
-          return;
-        }else{
-          err[0].innerHTML = '';
-        }
-        var tasks = document.getElementById('tasks');
-        tasks.innerHTML += `<div class="task">
-              <div class="task-content">
-                <input 
-                  type="text"
-                  class="task-name"
-                  value="${input}"
-                  readonly
-                 />
-              </div>
-              <div class="actions">
-                <button type="submit" class="edit" onClick="toggleEditMode(this)">Edit</button>
-                <button type="submit" class="delete" onClick="deleteTask(this)">Delete</button>
-              </div>
-            </div>`;
-        
-        document.getElementById('add-task').value = '';
-      })
-
-      function toggleEditMode(){
-        var task = document.getElementsByClassName('task-name');
-        var edit = document.getElementsByClassName('edit');
-        if(task[0].hasAttribute('readonly')){
-          for(var i=0; i<task.length; i++){
-            task[i].removeAttribute('readonly');
-          }
-          edit[0].innerHTML = 'Save';
-        }else{
-          for(var i=0; i<task.length; i++){
-            task[i].setAttribute('readonly',true);
-          }
-          edit[0].innerHTML = 'Edit';
-        }
-      }
-
-      function deleteTask(e){
-        e.parentElement.parentElement.remove();
-      }
-      
+    <script src="list.js">      
     </script>
     
   </body>
