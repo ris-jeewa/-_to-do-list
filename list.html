@@ -10,11 +10,12 @@
     <div class="sideBar" id="sidebar">
       <img src="./icons/xmark-solid.svg" alt="x" width="20" height="20" class="closebtn" onclick="closeNav()"/>
       <div class="menuItems">
-        <a href="#" onclick="handleDisplay(this)">Important</a>
-        <a href="#">Academic</a>
-        <a href="#">Projects</a>
-        <a href="#">Daily</a>
-        <a href="#">Trash</a>
+        <a onclick="displayAll('All','all')">All</a>
+        <a onclick="displayAll('Important','fav')">Important</a>
+        <a onclick="displayAll('Academic','aca')">Academic</a>
+        <a onclick="displayAll('Projects','proj')">Projects</a>
+        <a onclick="displayAll('Daily','daily')">Daily</a>
+        <a onclick="displayAll('Trash','del')">Trash</a>
       </div>
     </div>
     
@@ -29,9 +30,10 @@
             <input type="text" id="add-task" placeholder="Enter your task" />
             
               <select name="category" id="category">
+                <option value="default">Select category</option>
                 <option value="daily">Daily</option>
                 <option value="aca">Academic</option>
-                <option value="dev">Development</option>
+                <option value="proj">Projects</option>
               </select>
               
           </div>
@@ -43,7 +45,7 @@
   
       <main>
         <section class="task-list">
-          <h2 id="display-name">Task List</h2>
+          <h2 id="display-name"></h2>
           <div id="tasks">
           </div>
       </main>
